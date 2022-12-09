@@ -1,6 +1,14 @@
 require 'test_helper'
 
 class CategoriesControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    @category = categories :one
+
+    get '/users/sign_in'
+    sign_in users :one
+    post user_session_url
+  end
+
   test "should get index" do
     get '/categories'
     assert_response :success
@@ -10,7 +18,7 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
     category = Category.new
     category.name = "di ko alam ano to"
     category.save
-    get "/categories/#{category.id}"
+    get "/categories/#{@category.id}"
     assert_response :success
   end
 
@@ -28,7 +36,7 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
     category = Category.new
     category.name = "category 3"
     category.save
-    get "/categories/#{category.id}/edit"
+    get "/categories/#{@category.id}/edit"
     assert_response :success
   end
 
@@ -36,7 +44,7 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
     category = Category.new
     category.name = 'lasdasdsbek'
     category.save
-    put "/categories/#{category.id}", params: {category: {name: 'asdasxzzz'}}
+    put "/categories/#{@category.id}", params: {category: {name: 'asdasxzzz'}}
     assert_response :redirect
   end
 
@@ -44,7 +52,7 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
     category = Category.new
     category.name = "category sample2"
     category.save
-    delete "/categories/#{category.id}"
+    delete "/categories/#{@category.id}"
     assert_response :redirect
   end
 

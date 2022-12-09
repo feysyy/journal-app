@@ -1,13 +1,21 @@
 require 'test_helper'
 
 class TasksControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    @category = categories(:one)
+    @task = tasks(:one)
+
+    get "/users/sign_in"
+    sign_in users :one
+    post user_session_url
+  end
+
   test "should render new task form" do
     category = Category.new
     category.name = "category sample"
-    category.user_id = user.id
     category.save
 
-    get "/categories/#{category.id}/tasks/new"
+    get "/categories/#{@category.id}/tasks/new"
     assert_response :success
   end 
 
@@ -16,7 +24,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     category.name = "sample category"
     category.save
 
-    post "/categories/#{category.id}/tasks", params: {task: {name: "task sample", description: "sample task"} }
+    post "/categories/#{@category.id}/tasks", params: {task: {name: "task sample", description: "sample task"} }
     assert_response :redirect
   end 
 
@@ -31,7 +39,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     task.category_id = category.id
     task.save
 
-    get "/categories/#{category.id}/tasks/#{task.id}"
+    get "/categories/#{@category.id}/tasks/#{@task.id}"
     assert_response :success
   end
 
@@ -46,7 +54,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     task.category_id = category.id
     task.save
 
-    get "/categories/#{category.id}/tasks/#{task.id}/edit"
+    get "/categories/#{@category.id}/tasks/#{@task.id}/edit"
     assert_response :success
   end 
 
@@ -61,7 +69,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     task.category_id = category.id
     task.save
 
-    put "/categories/#{category.id}/tasks/#{task.id}", params: {task: {name: "abcdefghij", description: "klmnopqrstuv"}}
+    put "/categories/#{@category.id}/tasks/#{@task.id}", params: {task: {name: "abcdefghij", description: "klmnopqrstuv"}}
     assert_response :redirect
   end 
 
@@ -77,7 +85,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     task.category_id = category.id
     task.save
     
-    delete "/categories/#{category.id}/tasks/#{task.id}"
+    delete "/categories/#{@category.id}/tasks/#{@task.id}"
     assert_response :redirect
   end 
 end

@@ -13,21 +13,21 @@ Rails.application.routes.draw do
 
   # tasks routes
 
-  # get '/categories/:category_id/tasks', to: "tasks#index", as: 'new_category_tasks'
+  # get '/categories/:category_id/tasks', to: "tasks#index", as: "category_tasks"
   # post '/categories/:category_id/tasks', to: "tasks#create"
-  # get '/categories/:category_id/tasks/new', to: "tasks#new"
-  # get '/categories/:category_id/tasks/:id/edit', to: "tasks#edit"
-  # get '/categories/:category_id/tasks/:id', to: "tasks#show"
-  # path '/categories/:category_id/tasks/:id', to: "tasks#update"
+  # get '/categories/:category_id/tasks/new', to: "tasks#new", as: 'new_category_task'
+  # get '/categories/:category_id/tasks/:id/edit', to: "tasks#edit", as: 'edit_category_task'
+  # get '/categories/:category_id/tasks/:id', to: "tasks#show", as: 'category_task'
+  # patch '/categories/:category_id/tasks/:id', to: "tasks#update"
   # delete '/categories/:category_id/tasks/:id', to: "tasks#destroy"
 
   # categories routes
 
-  # get '/categories', to: "categories#index"
+  # get '/categories', to: "categories#index", as: 'categories'
   # post '/categories', to: "categories#create"
-  # get '/categories/new', to: "categories#new"
-  # get '/categories/:id/edit', to: "categories#edit"
-  # get '/categories/:id', to: "categories#show"
+  # get '/categories/new', to: "categories#new", as: 'new_category'
+  # get '/categories/:id/edit', to: "categories#edit", as: 'edit_category'
+  # get '/categories/:id', to: "categories#show", as: 'category'
   # patch  '/categories/:id', to: "categories#update"
-  # delete '/categories/:id', to: "categories#destroy"
+  # delete '/categories/:id', to: 'categories#destroy'
 end

@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!
+
   def index
     @categories = Category.where(user_id: current_user.id) if user_signed_in?
     @tasks_today = Task.where("date >= ? and date < ? and user_id = ?", Date.today, Date.today.tomorrow, current_user.id)

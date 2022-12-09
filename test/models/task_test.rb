@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class TaskTest < ActiveSupport::TestCase
-
   test 'should create task with valid name length' do
     # valid name length should be 5 characters
     user = User.new
