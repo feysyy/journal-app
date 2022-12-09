@@ -1,0 +1,18 @@
+<div>
+  <h1><%= @category.name.titleize %>  </h1>
+</div>
+
+<%= link_to "Home", categories_path %>
+<%= link_to "Edit", edit_category_path %>
+<br>
+<br>
+<%#= link_to "New Task", category_tasks_path(@category) %>
+<%= link_to "New Task", new_category_task_path(@category) %>
+
+<div>
+  <% @category_tasks.each do |task| %>
+    <h2>Task: <%= task.name %> </h2>
+    <%= link_to "View", category_task_path(@category.id, task.id) %>
+  <% end %>
+
+</div>

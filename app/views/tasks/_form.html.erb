@@ -1,0 +1,21 @@
+<%= form_with model: [@category, @task] do |form| %>
+  <p>
+    <%= form.label :name %> 
+    <%= form.text_area :name %>
+  </p>
+
+  <p>
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </p>
+
+  <div>
+    <%= form.label :date %>
+    <%= form.datetime_field :date %>
+  </div>
+
+  <p>
+    <%= form.submit %>  
+  </p>
+
+<% end %>

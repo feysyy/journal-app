@@ -1,0 +1,33 @@
+<% if user_signed_in? %>
+  <p>User: <%= current_user.email %></p>
+  <%= button_to "Sign Out", destroy_user_session_path, method: :delete %>
+  <% else %>
+    <%= link_to "Log-in", new_user_session_path%>
+<% end %>
+
+<div>
+  <p>Task for today:</p>
+  <% @tasks_today.each do |task| %>
+    <p>Task: <%= task.name %></p>
+    <p>Date: <%= task.date.strftime("%a - %b %-d, %Y") %></p>
+    <br>
+  <% end %>
+</div>
+
+<%= link_to "New Category", new_category_path %>
+
+<div>
+  <%#= @categories.count %>
+  <% @categories.each do |category| %>
+    <%#= category.id %>
+    <p> <%= category.name.titleize %> </p>
+    <%= link_to "View", category_path(category) %>
+    <%= link_to "Delete", category_path(category), data: {
+        turbo_method: :delete,
+        turbo_confirm: "Are you sure?"
+      }
+    %>
+  <% end %>
+</div>
+
+
