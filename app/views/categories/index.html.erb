@@ -6,11 +6,19 @@
 <% end %>
 
 <div>
-  <p>Task for today:</p>
+  
+  <p>Task for today (<%= Date.today.strftime("%b-%d-%Y") %>) :</p>
   <% @tasks_today.each do |task| %>
-    <p>Task: <%= task.name %></p>
-    <p>Date: <%= task.date.strftime("%a - %b %-d, %Y") %></p>
-    <br>
+    <h3>Task: <%= task.name %></h3>
+    <p>
+      <span>
+        <% if task.done %>
+          <p> Status: Done </p>
+        <% elsif %>
+          <p> Status: On-going </p>
+        <% end %>
+      </span>
+    </p>
   <% end %>
 </div>
 

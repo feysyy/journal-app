@@ -1,7 +1,10 @@
 <div>
-  <h1>Task: <%= @task.name.titleize %></h1>
-  <p>Description: <%= @task.description.titleize %></p>
-  <p>Date: <%= @task.date.strftime("%a - %b %-d, %Y") %> </p>
+  <%= form_with model: [@category, @task] do |f|  %>
+    <h1> <span> <%= f.check_box :done, onchange: "this.form.submit();" %></span> Task: <%= @task.name.titleize %></h1>
+    <p>Description: <%= @task.description.titleize %></p>
+    <p>Date: <%= @task.date.strftime("%a - %b %-d, %Y") %> </p>
+  <% end %>
+
 </div>
 <br>
 <%= link_to "Back", category_path(@category)%>

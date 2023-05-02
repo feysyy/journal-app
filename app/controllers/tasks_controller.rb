@@ -15,9 +15,9 @@ class TasksController < ApplicationController
     task.update(user_id: current_user.id)
 
     if task.save
-      redirect_to category_path(@category)
+      redirect_to category_path(@category), notice: "Task has been successfully create"
     else
-      render :new
+      redirect_to category_path(@category), alert: "#{task.errors.first.message}"
     end
   end
 
@@ -49,7 +49,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:name, :description, :category_id, :date, :user_id)
+    params.require(:task).permit(:name, :description, :category_id, :date, :user_id, :done)
   end
 
 end

@@ -20,9 +20,9 @@ class CategoriesController < ApplicationController
     category.update(user_id: current_user.id)
 
     if category.save
-      redirect_to "/categories/#{category.id}"
+      redirect_to "/categories/#{category.id}", notice: "Category has been created"
     else 
-      render :new
+      redirect_to "/categories/#{category.id}", alert: "Name #{category.errors.first.message}"
     end
   end
 
