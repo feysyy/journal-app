@@ -34,7 +34,7 @@ class CategoriesController < ApplicationController
     category = Category.find(params[:id])
 
     if category.update(category_params)
-      redirect_to root_path
+      redirect_to "/categories/#{category.id}"
     else 
       render :edit
     end

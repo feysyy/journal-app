@@ -1,41 +1,48 @@
-<% if user_signed_in? %>
-  <p>User: <%= current_user.email %></p>
-  <%= button_to "Sign Out", destroy_user_session_path, method: :delete %>
-  <% else %>
-    <%= link_to "Log-in", new_user_session_path%>
-<% end %>
+<header class="text-right mr-8">
+  <p class="mt-2">User: <%= current_user.email %></p>
+  <p> <%= button_to "Sign-out", destroy_user_session_path, method: :delete, class: "border border-black rounded-xl w-24 mt-2" %> </p>
+</header>
 
-<div>
-  
-  <p>Task for today (<%= Date.today.strftime("%b-%d-%Y") %>) :</p>
-  <% @tasks_today.each do |task| %>
-    <h3>Task: <%= task.name %></h3>
-    <p>
-      <span>
-        <% if task.done %>
-          <p> Status: Done </p>
-        <% elsif %>
-          <p> Status: On-going </p>
-        <% end %>
-      </span>
-    </p>
-  <% end %>
-</div>
+<main>
+  <div class="border border-black mt-4">
+    <div class="text-center">
+      <%= Date.today.strftime("%b-%d-%Y") %>
+      <p>Task for today:</p>
+    </div>
+    <% @tasks_today.each do |task| %>
+      <h3>Task: <%= task.name %></h3>
+      <p>
+        <span>
+          <% if task.done %>
+            <p> Status: Done </p>
+          <% elsif %>
+            <p> Status: On-going </p>
+          <% end %>
+        </span>
+      </p>
+    <% end %>
+  </div>
 
-<%= link_to "New Category", new_category_path %>
+  <p class="border border-black rounded-xl w-32 text-center mt-4"> <%= link_to "New Category", new_category_path %> </p>
 
-<div>
-  <%#= @categories.count %>
-  <% @categories.each do |category| %>
-    <%#= category.id %>
-    <p> <%= category.name.titleize %> </p>
-    <%= link_to "View", category_path(category) %>
-    <%= link_to "Delete", category_path(category), data: {
-        turbo_method: :delete,
-        turbo_confirm: "Are you sure?"
-      }
-    %>
-  <% end %>
-</div>
+  <p class="text-center my-2 text-2xl">Categories:</p>
+  <div class="border-4 rounded-xl mt-4 pt-4 w-4/6 h-96 ml-auto mr-auto overflow-y-auto">
+
+    <div class="grid grid-cols-5">
+      <% @categories.each do |category| %>
+        <div class="border border-black rounded-xl w-48 ml-4 mt-2 text-center py-2">
+          <p class="mb-2"> <%= link_to category.name.titleize, category_path(category) %> </p>
+          <%= link_to "View", category_path(category), class: "border border-black rounded-xl px-2" %>
+          <%= link_to "Delete", category_path(category), data: {
+              turbo_method: :delete,
+              turbo_confirm: "Are you sure?"
+            },
+            class: "border border-black rounded-xl px-2"
+          %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</main>
 
 

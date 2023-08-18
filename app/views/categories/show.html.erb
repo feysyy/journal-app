@@ -1,9 +1,9 @@
-<div>
-  <h1><%= @category.name.titleize %>  </h1>
+<%= link_to "Home", categories_path, class: "ml-4" %>
+<div class="flex ml-2">
+  <h1 class="border-b-2 border-black"><%= @category.name.titleize %> </h1>
+  <%= link_to " - Edit", edit_category_path %>
 </div>
 
-<%= link_to "Home", categories_path %>
-<%= link_to "Edit", edit_category_path %>
 <br>
 <br>
 <%#= link_to "New Task", category_tasks_path(@category) %>
