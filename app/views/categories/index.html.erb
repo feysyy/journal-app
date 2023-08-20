@@ -4,31 +4,35 @@
 </header>
 
 <main>
-  <div class="border border-black mt-4">
-    <div class="text-center">
-      <%= Date.today.strftime("%b-%d-%Y") %>
-      <p>Task for today:</p>
+  <div class="text-center text-2xl">
+    <%= Date.today.strftime("%b %d, %Y") %>
+    <p>Task for today:</p>
+  </div>
+  <div class="border-2 mt-2 h-72 overflow-y-auto">
+    
+    <div class="grid grid-cols-5 overflow-y-auto">
+      <% @tasks_today.each do |task| %>
+        <div class="border border-black rounded-xl w-48 ml-4 mt-4 text-center py-2">
+          <h3>Task: <%= task.name %></h3>
+          <p>
+            <span>
+              <% if task.done %>
+                <p> Status: Done </p>
+              <% elsif %>
+                <p> Status: On-going </p>
+              <% end %>
+            </span>
+          </p>
+        </div>
+      <% end %>
     </div>
-    <% @tasks_today.each do |task| %>
-      <h3>Task: <%= task.name %></h3>
-      <p>
-        <span>
-          <% if task.done %>
-            <p> Status: Done </p>
-          <% elsif %>
-            <p> Status: On-going </p>
-          <% end %>
-        </span>
-      </p>
-    <% end %>
   </div>
 
   <p class="border border-black rounded-xl w-32 text-center mt-4"> <%= link_to "New Category", new_category_path %> </p>
 
-  <p class="text-center my-2 text-2xl">Categories:</p>
-  <div class="border-4 rounded-xl mt-4 pt-4 w-4/6 h-96 ml-auto mr-auto overflow-y-auto">
-
-    <div class="grid grid-cols-5">
+  <p class="text-center text-2xl">Categories:</p>
+  <div class="border-4 rounded-xl mt-4 pt-4 w-5/6 h-96 ml-auto mr-auto overflow-y-auto">
+    <div class="grid grid-cols-4">
       <% @categories.each do |category| %>
         <div class="border border-black rounded-xl w-48 ml-4 mt-2 text-center py-2">
           <p class="mb-2"> <%= link_to category.name.titleize, category_path(category) %> </p>
